@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Button, Text, GridItem } from "@chakra-ui/react";
 
 type peekText = {
     text: string
@@ -6,11 +6,13 @@ type peekText = {
 const Document = (props: peekText) => {
     const { text } = props
     return (
-        <Box>
-            <Text >
-                {text}
-            </Text>
-        </Box>
+        <GridItem>
+            <Button variant="document">
+                <Text >
+                    {text}
+                </Text>
+            </Button>
+        </GridItem>
     ); 
 }
 export default Document 
