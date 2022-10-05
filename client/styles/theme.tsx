@@ -2,9 +2,13 @@ import { extendTheme } from "@chakra-ui/react"
 import "@fontsource/dm-sans";
 
 const theme = extendTheme({
-    body: {
-        color: "#F8F8F8"
-    }, 
+    styles: {
+        global: {
+            body: {
+                bg: "#F8F8F8"
+            }
+        }
+    },
     components: {
         Heading: {
             baseStyle: {
@@ -13,10 +17,10 @@ const theme = extendTheme({
             },
             sizes: {
                 primary: {
-                    fontSize: "4xl"
+                    fontSize: "5xl"
                 }, 
                 secondary: {
-                    fontSize: "2xl"
+                    fontSize: "3xl"
                 }
             }, 
             variants: {
@@ -34,21 +38,23 @@ const theme = extendTheme({
                 document: {
                     bg: "#F8F8F8", 
                     m: "20px", 
-                    mr: "40px", 
-                    ml: "40px",
-                    p: "5px",
-                    borderRadius: "10px", 
+                    mr: "50px", 
+                    ml: "50px",
+                    p: "10px",
+                    borderRadius: "7px", 
                     width: "100px",
                     height: "100px", 
                     whiteSpace: "normal", 
                     fontSize: "sm", 
                     textAlign: "left",
-                    color: "#545454"
+                    color: "#545454", 
+                    border: "1px solid #A3A3A3", 
                 },
                 addbutton: {
                     width: "130px",
                     height: "130px",
-                    pb: "10px"
+                    ml: "36px", 
+                    mt: "5px"
                 },
                 createbutton: {
                     bg: "#2F80ED",

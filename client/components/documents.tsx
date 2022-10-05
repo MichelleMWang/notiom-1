@@ -11,7 +11,7 @@ const Documents = () => {
     }) 
 
     return (
-        <Center mt="100">
+        <Center mt="150" bg="white" pb="70" pt="10">
             <Grid templateColumns='repeat(6, 1fr)'>
                 {documentList}
             </Grid>
