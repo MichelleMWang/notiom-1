@@ -2,8 +2,8 @@ import { Heading, Box } from "@chakra-ui/react";
 const MainText = () => {
     return (
         <Box align="center">
-            <Heading textStyle="bigtext"> Create. Explore. </Heading>
-            <Heading textStyle="littletext"> The document editing software you’ve been waiting for </Heading>
+            <Heading size='primary'> Create. Explore. </Heading>
+            <Heading size='secondary' > The document editing software you’ve been waiting for </Heading>
         </Box>
     );
 }
