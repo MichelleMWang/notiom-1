@@ -1,4 +1,4 @@
-import { Image, Box, Heading, HStack } from "@chakra-ui/react"; 
+import { Image, Heading, HStack } from "@chakra-ui/react"; 
 
 const Logo = () => {
     return (
