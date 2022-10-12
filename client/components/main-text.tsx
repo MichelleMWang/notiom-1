@@ -3,7 +3,7 @@ const MainText = () => {
     return (
         <Box align="center">
             <Heading size='primary' variant="mainText"> Create. Explore. </Heading>
-            <Heading size='secondary' > The document editing software you’ve been waiting for </Heading>
+            <Heading size='secondary' > The document editing software you’ve been waiting for! </Heading>
         </Box>
     );
 }
