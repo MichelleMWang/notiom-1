@@ -13,21 +13,31 @@ import {
         Textarea,
 } from "@chakra-ui/react";
 
-const AddButton = () => {
+type documentText = {
+    setDocumentText:  React.Dispatch<React.SetStateAction<string[]>>
+    text: string[]
+}
+
+const AddButton = ( props: documentText ) => {
     // opening and closing modal
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { setDocumentText, text } = props 
     
     // state
     const [value, setValue] = React.useState("");
-    const handleInputChange = e => {
+    const handleInputChange = (e: { target: { value: any; }; }) => {
         const inputValue = e.target.value;
         setValue(inputValue);
     };
+    const onSubmit = () => {
+        setDocumentText([...text, value])
+        onClose() 
+    }
 
     return(
         <>
             <Button variant="addbutton" onClick={onOpen}>
-                <Image src="add-button-image.svg"></Image>
+                <Image src="add-button-image.svg" alt="image of document and plus sign"></Image>
             </Button>
 
             <Modal isOpen={isOpen} onClose={onClose} size="full">
@@ -41,7 +51,8 @@ const AddButton = () => {
                     </ModalBody>   
 
                     <ModalFooter>
-                        <Button variant="createbutton" type="submit">Save</Button>
+                        <Button variant="createbutton" type="submit" onClick={onSubmit}>Save</Button>
+                        
                     </ModalFooter>
                 </ModalContent>
             </Modal>

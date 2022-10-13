@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import MainText from "../components/main-text";
-import Documents from "../components/documents/documents"
+import DocumentGrid from "../components/documents/document-grid";
 import NavBar from "../components/navbar"
 
 const Landing: NextPage = () => {
@@ -8,7 +8,7 @@ const Landing: NextPage = () => {
         <>
             <NavBar></NavBar>
             <MainText></MainText>
-            <Documents></Documents>
+            <DocumentGrid></DocumentGrid>
         </>
     );
 }
