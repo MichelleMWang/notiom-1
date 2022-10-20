@@ -42,8 +42,8 @@ const theme = extendTheme({
                     ml: "50px",
                     p: "10px",
                     borderRadius: "7px", 
-                    width: "100px",
-                    height: "100px", 
+                    width: "125px",
+                    height: "125px", 
                     whiteSpace: "normal", 
                     fontSize: "sm", 
                     textAlign: "left",
@@ -51,10 +51,11 @@ const theme = extendTheme({
                     border: "1px solid #A3A3A3", 
                 },
                 addbutton: {
-                    width: "130px",
-                    height: "130px",
+                    width: "158px",
+                    height: "156px",
                     ml: "36px", 
-                    mt: "5px"
+                    mt: "5px",
+                    mr: "20px"
                 },
                 createbutton: {
                     bg: "#2F80ED",
@@ -62,8 +63,7 @@ const theme = extendTheme({
                 }
 
             }
-        }, 
+        },
     }, 
-
 })
 export default theme; 
