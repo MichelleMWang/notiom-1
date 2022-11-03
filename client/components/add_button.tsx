@@ -12,24 +12,51 @@ import {
         useDisclosure,
         Textarea,
 } from "@chakra-ui/react";
+import { supabase } from "./../supabase"
 
 type documentText = {
-    setDocumentText:  React.Dispatch<React.SetStateAction<string[]>>
-    text: string[]
+    setFullDoc: any,
+    fullDoc: any[]
 }
+const getCurrentDateString = () => {
+    const date = new Date().getDate() //current date
+    const month = new Date().getMonth() + 1 //current month
+    const year = new Date().getFullYear() //current year
+    const hours = new Date().getHours() //current hours
+    const min = new Date().getMinutes() //current minutes
+    const sec = new Date().getSeconds() //current seconds
 
+    return date + '/' + month + '/' + year + '    ' +  hours + ':' + min + ':' + sec
+}
 const AddButton = ( props: documentText ) => {
     // opening and closing modal
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const { setDocumentText, text } = props 
+    const { setFullDoc, fullDoc } = props 
     
     // state
     const [value, setValue] = React.useState("");
     const handleInputChange = (e: { target: { value: any; }; }) => {
        setValue(e.target.value);
     };
+    const addDoc = async (newDoc: { id: number; user_id: number; title: string; body: string; created: string; }) => {
+        const { data, error } = await supabase 
+            .from("docs")
+            .insert(newDoc)
+        if (error) throw error; 
+    }
     const onSubmit = () => {
-        setDocumentText([...text, value])
+        const fullDocCopy = [...fullDoc]
+        const time = getCurrentDateString() 
+        const newDoc = {
+            id: Math.round(Math.random() * 0xFF), 
+            user_id: 3, 
+            title: 'placeholdertitle', 
+            body: value, 
+            created: time
+        }
+        fullDocCopy.push(newDoc)
+        setFullDoc(fullDocCopy)
+        addDoc(newDoc)
         setValue('')
         onClose() 
     }

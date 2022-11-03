@@ -9,26 +9,54 @@ import { Button, Text, GridItem,
     useDisclosure,
     Textarea, } from "@chakra-ui/react";
 import React from "react"
+import { supabase } from "../../supabase"
 
 type peekText = {
     text: string, 
-    document: string[], 
-    setDocumentText: any 
+    title: string,
+    id: number,
+    fullDoc: any[], 
+    setFullDoc: any
 }
+/*const getCurrentDateString = () => {
+    const date = new Date().getDate() //current date
+    const month = new Date().getMonth() + 1 //current month
+    const year = new Date().getFullYear() //current year
+    const hours = new Date().getHours() //current hours
+    const min = new Date().getMinutes() //current minutes
+    const sec = new Date().getSeconds() //current seconds
+
+    return date + '/' + month + '/' + year + '    ' +  hours + ':' + min + ':' + sec
+} */
 const Document = (props: peekText) => {
-    const { text, document, setDocumentText } = props
+    const { text, title, id, fullDoc, setFullDoc } = props
+
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const [value, setValue] = React.useState(text);
+    
+
     const handleInputChange = (e: { target: { value: any; }; }) => {
         const inputValue = e.target.value;
         setValue(inputValue);
     };
-    const onSubmit = () => {
-        const newDoc = [...document]; 
-        newDoc[document.indexOf(text)] = value 
-        setDocumentText(newDoc)
 
+    const updateDocs = async () => {
+        const { data, error } = await supabase 
+            .from("docs")
+            .update({body: value})
+            .eq('id', id)
+        if (error) throw error; 
+    }
+    const onSubmit = () => { 
+        const fullDocCopy = [...fullDoc]
+        fullDocCopy.forEach((doc) => {
+            if (doc.id == id) {
+                doc.body = value 
+            }
+        })
+        setFullDoc(fullDocCopy)
+        updateDocs()
         onClose() 
     }
 
