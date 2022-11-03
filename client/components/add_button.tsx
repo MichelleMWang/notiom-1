@@ -1,4 +1,5 @@
 import React from "react";
+import addDoc from "../pages/api/createDoc";
 import {
         Button, 
         Image,
@@ -12,7 +13,7 @@ import {
         useDisclosure,
         Textarea,
 } from "@chakra-ui/react";
-import { supabase } from "./../supabase"
+
 
 type documentText = {
     setFullDoc: any,
@@ -38,12 +39,7 @@ const AddButton = ( props: documentText ) => {
     const handleInputChange = (e: { target: { value: any; }; }) => {
        setValue(e.target.value);
     };
-    const addDoc = async (newDoc: { id: number; user_id: number; title: string; body: string; created: string; }) => {
-        const { data, error } = await supabase 
-            .from("docs")
-            .insert(newDoc)
-        if (error) throw error; 
-    }
+
     const onSubmit = () => {
         const fullDocCopy = [...fullDoc]
         const time = getCurrentDateString() 

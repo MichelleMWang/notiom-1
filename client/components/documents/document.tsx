@@ -8,8 +8,10 @@ import { Button, Text, GridItem,
     ModalCloseButton,
     useDisclosure,
     Textarea, } from "@chakra-ui/react";
+import updateDocs from "../../pages/api/updateDoc";
+import deleteDoc from "../../pages/api/deleteDoc";
 import React from "react"
-import { supabase } from "../../supabase"
+
 
 type peekText = {
     text: string, 
@@ -18,16 +20,7 @@ type peekText = {
     fullDoc: any[], 
     setFullDoc: any
 }
-/*const getCurrentDateString = () => {
-    const date = new Date().getDate() //current date
-    const month = new Date().getMonth() + 1 //current month
-    const year = new Date().getFullYear() //current year
-    const hours = new Date().getHours() //current hours
-    const min = new Date().getMinutes() //current minutes
-    const sec = new Date().getSeconds() //current seconds
 
-    return date + '/' + month + '/' + year + '    ' +  hours + ':' + min + ':' + sec
-} */
 const Document = (props: peekText) => {
     const { text, title, id, fullDoc, setFullDoc } = props
 
@@ -40,14 +33,6 @@ const Document = (props: peekText) => {
         const inputValue = e.target.value;
         setValue(inputValue);
     };
-
-    const updateDocs = async () => {
-        const { data, error } = await supabase 
-            .from("docs")
-            .update({body: value})
-            .eq('id', id)
-        if (error) throw error; 
-    }
     const onSubmit = () => { 
         const fullDocCopy = [...fullDoc]
         fullDocCopy.forEach((doc) => {
@@ -56,9 +41,22 @@ const Document = (props: peekText) => {
             }
         })
         setFullDoc(fullDocCopy)
-        updateDocs()
+        updateDocs(id, value)
         onClose() 
     }
+    const onDelete = () => {
+        deleteDoc(id)
+        const fullDocCopy = [...fullDoc]
+        for (let i = 0; i < fullDocCopy.length; i++){
+            if (fullDocCopy[i].id == id){
+                fullDocCopy.splice(i, 1)
+                break; 
+            }
+        }
+        setFullDoc(fullDocCopy)
+        onClose() 
+    }
+
 
     return (
         <GridItem>
@@ -81,7 +79,7 @@ const Document = (props: peekText) => {
 
                     <ModalFooter>
                         <Button variant="createbutton" type="submit" onClick={onSubmit}>Save</Button>
-                        
+                        <Button onClick={onDelete}>Delete Document</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

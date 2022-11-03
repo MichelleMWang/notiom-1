@@ -1,39 +1,25 @@
 import React from "react"; 
 import { useEffect } from "react";
-import { supabase } from "../../supabase"
 import {
     Center, Grid, GridItem
 } from "@chakra-ui/react";
 import AddButton from "../add_button";
 import Document from "./document"
+import getDocs from "../../pages/api/getDoc";
 
 
 const DocumentGrid = () => {
     const [fullDoc, setFullDoc] = React.useState([{
         id: 1, 
         user_id: 1, 
-        title: "how to get away with murder", 
-        body: "don't ask me",
-        created: "02/03/2022 12:33:04" },
-        {
-            id: 2, 
-            user_id: 1, 
-            title: "test", 
-            body: "haha test", 
-            created: "03/02/2023 12:32:05" }
-    ])
+        title: "placeholdertitle", 
+        body: "placeholderbody",
+        created: "02/03/2022 12:33:04" }])
 
     useEffect(()=>{
-        fetchDocs(); 
+        getDocs().then(function (response) 
+        {setFullDoc(response)}); 
     }, []); 
-
-    const fetchDocs = async () => {
-        const { data, error } = await supabase 
-            .from("docs")
-            .select("*")
-        if (error) throw error; 
-        setFullDoc(data)
-    }
 
     return (
         <>
