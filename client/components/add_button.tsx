@@ -26,7 +26,7 @@ const AddButton = ( props: documentText ) => {
     // state
     const [value, setValue] = React.useState("");
     const handleInputChange = (e: { target: { value: any; }; }) => {
-        setValue(e.target.value);
+       setValue(e.target.value);
     };
     const onSubmit = () => {
         setDocumentText([...text, value])
