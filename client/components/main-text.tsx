@@ -6,7 +6,9 @@ const MainText = () => {
             <Center>
                 <Heading size='primary' variant="mainText"> Create. Explore. </Heading>
             </Center>
+            <Center>
                 <Heading size='secondary' > The document editing software you’ve been waiting for! </Heading>        
+            </Center>
         </Box>
         </Center>
     );
